@@ -23,9 +23,6 @@ public class BurgerTest {
     @Mock
     Ingredient ingredient;
 
-    @Spy
-    List<Ingredient> ingredients;
-
     Burger burger = new Burger();
 
 
