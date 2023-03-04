@@ -25,23 +25,24 @@ public class BunNegativeTest {
     public static Object[][] getTestData() {
         return new Object[][] {
 
-                //name - пустая строка, price - пустая строка
-                { "",  "" },
-                //name - null, price -null
-                {null, null},
-                //строка длинной 50 символов, price double
-                { RandomStringUtils.random(101, true, false), new Random().nextFloat(50)*10,0000001 },
+                //name - пустая строка, price - наименьшее положительное
+                { "",  0.01f },
+                //name - null, price 0.00
+                {null, 0.00f},
+                //строка длинной 101 символов, price максимально положительная
+                { RandomStringUtils.random(101, true, false), 999999999.99f },
                 //спецсимволы в названии, price - отрицательное
-                { RandomStringUtils.random(5, true, false)+"$", -97.8751 },
+                { RandomStringUtils.random(5, true, false)+"$", -97.8751f },
         };
     }
-//не совсем понимаю, как правильно написать тест, если булка вообще не создается, но она и не должна создаваться по конструктору класса
-    //получается мы и нашли, что в классе негатив не учтен
+
+    //созданы разннобразные тестовые проверки, а вот насколько это верное поведение, это уже нужно уточнять
+
     @Test
     public void getName(){
 
         Bun bun = new Bun(name, price);
-        Assert.assertNull("Bun cant be created", bun);
+        Assert.assertEquals("Expected name doesn't match with actual name",name, bun.getName());
 
     }
 
@@ -49,7 +50,7 @@ public class BunNegativeTest {
     @Test
     public void getPrice() {
         Bun bun = new Bun(name, price);
-        Assert.assertNull("Bun cant be created", bun);
+        Assert.assertEquals("Expected name doesn't match with actual name",name, bun.getName());
 
     }
 }
